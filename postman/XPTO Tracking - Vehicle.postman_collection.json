@@ -1,0 +1,202 @@
+{
+	"info": {
+		"_postman_id": "0f3ccc32-b2e6-41e9-833e-aac26b4a8d5f",
+		"name": "XPTO Tracking - Vehicle",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7681669"
+	},
+	"item": [
+		{
+			"name": "List",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"currentDriver\": \"1ad86270-8bb5-4753-b664-79ac45e6de33\",\r\n    \"telemetryProfile\": \"1ad86270-8bb5-4753-b664-79ac45e6de33\",\r\n    \"customerOwner\": \"1ad86270-8bb5-4753-b664-79ac45e6de33\",\r\n    \"color\": \"silver horse\",\r\n    \"vin\": \"ABCD1234567890GHI\",\r\n    \"numberPlate\": \"AR04SU\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/tracking/vehicles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"tracking",
+						"vehicles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"currentDriver\": \"1ad86270-8bb5-4753-b664-79ac45e6de33\",\r\n    \"telemetryProfile\": \"1ad86270-8bb5-4753-b664-79ac45e6de33\",\r\n    \"customerOwner\": \"1ad86270-8bb5-4753-b664-79ac45e6de33\",\r\n    \"color\": \"silver horse\",\r\n    \"vin\": \"ABCD1234567890GHI\",\r\n    \"numberPlate\": \"AR04SU\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/tracking/vehicles/0af401df-7d7a-1f36-817d-7b0a058d0003",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tracking",
+						"vehicles",
+						"0af401df-7d7a-1f36-817d-7b0a058d0003"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET by Number Plate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/tracking/vehicles?numberPlate=cj-gta-5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"tracking",
+						"vehicles"
+					],
+					"query": [
+						{
+							"key": "numberPlate",
+							"value": "cj-gta-5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Vehicle",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"currentDriver\": \"1ad86270-8bb5-4753-b664-79ac45e6de33\",\r\n    \"telemetryProfile\": \"1ad86270-8bb5-4753-b664-79ac45e6de33\",\r\n    \"customerOwner\": \"1ad86270-8bb5-4753-b664-79ac45e6de33\",\r\n    \"color\": \"black piano\",\r\n    \"vin\": \"ABCD1234567890GHI\",\r\n    \"numberPlate\": \"BJ20CE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/tracking/vehicles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"tracking",
+						"vehicles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Vehicle Copy",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"currentDriver\": \"1ad86270-8bb5-4753-b664-79ac45e6de33\",\r\n    \"telemetryProfile\": \"1ad86270-8bb5-4753-b664-79ac45e6de33\",\r\n    \"customerOwner\": \"1ad86270-8bb5-4753-b664-79ac45e6de33\",\r\n    \"color\": \"insane blue\",\r\n    \"vin\": \"ABCD1234567890GHI\",\r\n    \"numberPlate\": \"CJ-GTA-5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/tracking/vehicles/6565d96d-7011-45a3-9930-b2e7bd59e722",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"tracking",
+						"vehicles",
+						"6565d96d-7011-45a3-9930-b2e7bd59e722"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove by ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"currentDriver\": \"1ad86270-8bb5-4753-b664-79ac45e6de33\",\r\n    \"telemetryProfile\": \"1ad86270-8bb5-4753-b664-79ac45e6de33\",\r\n    \"customerOwner\": \"1ad86270-8bb5-4753-b664-79ac45e6de33\",\r\n    \"color\": \"silver horse\",\r\n    \"vin\": \"ABCD1234567890GHI\",\r\n    \"numberPlate\": \"AR04SU\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/tracking/vehicles/544bca0c-c9dc-46f6-9bcd-ce2c85271b56",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"tracking",
+						"vehicles",
+						"544bca0c-c9dc-46f6-9bcd-ce2c85271b56"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

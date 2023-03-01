@@ -3,6 +3,7 @@ package com.ipl.xpto.trackingVehicles.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ import com.ipl.xpto.trackingVehicles.model.Vehicle;
 import com.ipl.xpto.trackingVehicles.repository.VehicleRepository;
 
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "http://localhost:8083")
 @RestController
 @RequestMapping("/tracking")
 public class VehicleController {
@@ -51,7 +52,7 @@ public class VehicleController {
   }
 
   @GetMapping("/vehicles/{id}")
-  public ResponseEntity<Vehicle> getTutorialById(@PathVariable("id") long id) {
+  public ResponseEntity<Vehicle> getTutorialById(@PathVariable("id") UUID id) {
     Optional<Vehicle> vehicleData = vehicleRepo.findById(id);
 
     if (vehicleData.isPresent()) {
@@ -79,7 +80,7 @@ public class VehicleController {
   }
 
   @PutMapping("/vehicles/{id}")
-  public ResponseEntity<Vehicle> updateTutorial(@PathVariable("id") long id, @RequestBody Vehicle vehicle) {
+  public ResponseEntity<Vehicle> updateTutorial(@PathVariable("id") UUID id, @RequestBody Vehicle vehicle) {
     Optional<Vehicle> vehicleData = vehicleRepo.findById(id);
 
     if (vehicleData.isPresent()) {
@@ -99,7 +100,7 @@ public class VehicleController {
   }
 
   @DeleteMapping("/vehicles/{id}")
-  public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") long id) {
+  public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") UUID id) {
     try {
     	vehicleRepo.deleteById(id);
       return new ResponseEntity<>(HttpStatus.NO_CONTENT);
