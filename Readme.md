@@ -2,6 +2,7 @@
 
 O objectivo deste microserviço é o gerenciamento de veículos. 
 Foi desenvolvido usando o Framework Spring, especificamente o Spring Boot e o Spring Data JPA, com um banco de dados PostgreSQL.
+Orientação conforme artigo: [Spring Boot, Spring Data JPA – Rest CRUD API example](https://www.bezkoder.com/spring-boot-jpa-crud-rest-api/).
 
 ## Uso
 
