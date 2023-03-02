@@ -2,6 +2,8 @@ package com.ipl.xpto.trackingVehicles.model;
 
 import java.util.UUID;
 import jakarta.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "vehicles")
@@ -12,22 +14,30 @@ public class Vehicle {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
 
+	@NotNull
 	@Column(name = "customerOwner")
 	private UUID customerOwner;
 	
+	@NotNull
 	@Column(name = "telemetryProfile")
 	private UUID telemetryProfile;
 	
+	@NotNull
 	@Column(name = "currentDriver")
 	private UUID currentDriver;
 	
+	@NotNull
+	@Size(min=6, max=12)
 	@Column(name = "numberPlate")
 	private String numberPlate;
 	
+	@NotNull
+	@Size(min=17, max=17)
 	@Column(name = "vin")
 	private String vin;
 	
 	@Column(name = "color")
+	@Size(max=30)
 	private String color;
 	
 	public Vehicle() {
@@ -64,11 +74,11 @@ public class Vehicle {
 	}
 
 	public void setNumberPlate(String numberPlate) {
-		this.numberPlate = numberPlate.toLowerCase();
+		this.numberPlate = numberPlate.toUpperCase();
 	}
 
 	public String getNumberPlate() {
-		return numberPlate;
+		return numberPlate.toUpperCase();
 	}
 	
 	public void setTelemetryProfile(UUID telemetryProfile) {

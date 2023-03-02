@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -63,16 +65,18 @@ public class VehicleController {
   }
 
   @PostMapping("/vehicles")
-  public ResponseEntity<Vehicle> createTutorial(@RequestBody Vehicle vehicle) {
+  public ResponseEntity<Vehicle> createTutorial(@RequestBody @Valid Vehicle vehicle) {
     try {
+    	
     	Vehicle _vehicle = vehicleRepo.save(
     			new Vehicle(
     					vehicle.getCurrentDriver(), 
     					vehicle.getTtelemetryProfile(), 
     					vehicle.getCustomerOwner(), 
-    					vehicle.getColor(), 
     					vehicle.getVin(),
+    					vehicle.getColor(), 
     					vehicle.getNumberPlate()));
+    	
       return new ResponseEntity<>(_vehicle, HttpStatus.CREATED);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
