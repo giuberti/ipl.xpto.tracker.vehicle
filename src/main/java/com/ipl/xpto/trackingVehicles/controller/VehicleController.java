@@ -21,6 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ipl.xpto.trackingVehicles.business.CustomerBusiness;
+import com.ipl.xpto.trackingVehicles.business.DriverBusiness;
+import com.ipl.xpto.trackingVehicles.exception.CustomerNotFoundException;
+import com.ipl.xpto.trackingVehicles.exception.DriverNotFoundException;
 import com.ipl.xpto.trackingVehicles.model.Vehicle;
 import com.ipl.xpto.trackingVehicles.repository.VehicleRepository;
 
@@ -68,6 +72,14 @@ public class VehicleController {
   public ResponseEntity<Vehicle> createTutorial(@RequestBody @Valid Vehicle vehicle) {
     try {
     	
+    	CustomerBusiness customer = new CustomerBusiness();
+    	if (customer.VerifyExistingCustomer(vehicle.getCustomerOwner()) == false)
+    		throw new CustomerNotFoundException("Customer Not Found");
+    	
+    	DriverBusiness driver = new DriverBusiness();
+    	if (driver.VerifyExistingDriver(vehicle.getCurrentDriver()) == false)
+    		throw new DriverNotFoundException("Driver Not Found");
+    	
     	Vehicle _vehicle = vehicleRepo.save(
     			new Vehicle(
     					vehicle.getCurrentDriver(), 
@@ -78,6 +90,10 @@ public class VehicleController {
     					vehicle.getNumberPlate()));
     	
       return new ResponseEntity<>(_vehicle, HttpStatus.CREATED);
+    } catch (CustomerNotFoundException e) {
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    } catch (DriverNotFoundException e) {
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
