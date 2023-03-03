@@ -106,6 +106,14 @@ public class VehicleController {
     if (vehicleData.isPresent()) {
 		Vehicle _vehicle = vehicleData.get();
 		
+    	CustomerBusiness customer = new CustomerBusiness();
+    	if (customer.VerifyExistingCustomer(vehicle.getCustomerOwner()) == false)
+    		return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    	
+    	DriverBusiness driver = new DriverBusiness();
+    	if (driver.VerifyExistingDriver(vehicle.getCurrentDriver()) == false)
+    		return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		
 		_vehicle.setColor(vehicle.getColor());
 		_vehicle.setVin(vehicle.getVin());
 		_vehicle.setNumberPlate(vehicle.getNumberPlate());
