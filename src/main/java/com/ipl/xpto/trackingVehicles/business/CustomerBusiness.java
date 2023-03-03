@@ -4,28 +4,31 @@ import java.net.http.HttpResponse;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import com.ipl.xpto.trackingVehicles.util.ApiConsumer;
 
 import java.util.UUID;
 
+@Component
 public class CustomerBusiness {
 	
-	@Value("${business.baseUrl.customers}")
-	private String _baseUrl;
+	@Value("${customers_base_url}")
+	private String baseUrl;
 	
 	public CustomerBusiness() {
-		_baseUrl = "http://localhost:8081/tracking";//org.hibernate.cfg.Environment.getProperties().getProperty("business.baseUrl.customers");
+		System.out.println(baseUrl);
+		baseUrl = "http://localhost:8081/tracking";//org.hibernate.cfg.Environment.getProperties().getProperty("business.baseUrl.customers");
 	}
 
 	public boolean VerifyExistingCustomer(UUID id) {
 		boolean result = false;
-        ApiConsumer apiConsumer = new ApiConsumer(_baseUrl);
+        ApiConsumer apiConsumer = new ApiConsumer(baseUrl);
         try {
         	CompletableFuture<HttpResponse<String>> responseFuture = apiConsumer.get("/customers/" + id);
         	HttpResponse<String> response;
 			response = responseFuture.get();
-			System.out.print(response.statusCode());
+			System.out.println(response.statusCode());
 			if (response.statusCode() == 200) {				
 				result = true;
 			}
