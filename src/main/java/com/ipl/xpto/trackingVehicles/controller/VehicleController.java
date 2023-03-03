@@ -36,6 +36,12 @@ public class VehicleController {
 
   @Autowired
   VehicleRepository vehicleRepo;
+  
+  @Autowired
+  CustomerBusiness customerBusiness;
+  
+  @Autowired
+  DriverBusiness driverBusiness;
 
   @GetMapping("/vehicles")
   public ResponseEntity<List<Vehicle>> getAllTutorials(@RequestParam(required = false) String numberPlate) {
@@ -72,18 +78,16 @@ public class VehicleController {
   public ResponseEntity<Vehicle> createTutorial(@RequestBody @Valid Vehicle vehicle) {
     try {
     	
-    	CustomerBusiness customer = new CustomerBusiness();
-    	if (customer.VerifyExistingCustomer(vehicle.getCustomerOwner()) == false)
+    	if (customerBusiness.VerifyExistingCustomer(vehicle.getCustomerOwner()) == false)
     		throw new CustomerNotFoundException("Customer Not Found");
     	
-    	DriverBusiness driver = new DriverBusiness();
-    	if (driver.VerifyExistingDriver(vehicle.getCurrentDriver()) == false)
+    	if (driverBusiness.VerifyExistingDriver(vehicle.getCurrentDriver()) == false)
     		throw new DriverNotFoundException("Driver Not Found");
     	
     	Vehicle _vehicle = vehicleRepo.save(
     			new Vehicle(
     					vehicle.getCurrentDriver(), 
-    					vehicle.getTtelemetryProfile(), 
+    					vehicle.getTelemetryProfile(), 
     					vehicle.getCustomerOwner(), 
     					vehicle.getVin(),
     					vehicle.getColor(), 
@@ -106,18 +110,16 @@ public class VehicleController {
     if (vehicleData.isPresent()) {
 		Vehicle _vehicle = vehicleData.get();
 		
-    	CustomerBusiness customer = new CustomerBusiness();
-    	if (customer.VerifyExistingCustomer(vehicle.getCustomerOwner()) == false)
+    	if (customerBusiness.VerifyExistingCustomer(vehicle.getCustomerOwner()) == false)
     		return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     	
-    	DriverBusiness driver = new DriverBusiness();
-    	if (driver.VerifyExistingDriver(vehicle.getCurrentDriver()) == false)
+    	if (driverBusiness.VerifyExistingDriver(vehicle.getCurrentDriver()) == false)
     		return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		
 		_vehicle.setColor(vehicle.getColor());
 		_vehicle.setVin(vehicle.getVin());
 		_vehicle.setNumberPlate(vehicle.getNumberPlate());
-		_vehicle.setTelemetryProfile(vehicle.getTtelemetryProfile());
+		_vehicle.setTelemetryProfile(vehicle.getTelemetryProfile());
 		_vehicle.setCustomerOwner(vehicle.getCustomerOwner());
 		_vehicle.setCurrentDriver(vehicle.getCurrentDriver());
 		

@@ -14,12 +14,13 @@ import com.ipl.xpto.trackingVehicles.util.ApiConsumer;
 @Component
 public class DriverBusiness {
 	
-	@Value("${drivers_base_url}")
+	@Value("${drivers.base.url}")
 	private String baseUrl;
 	
-	public DriverBusiness() {
+	public DriverBusiness(@Value("${customers.base.url}") String baseUrl) {
+		this.baseUrl = baseUrl;
 		System.out.println(baseUrl);
-		baseUrl = "http://localhost:8081/tracking";//org.hibernate.cfg.Environment.getProperties().getProperty("business.baseUrl.customers");
+		//baseUrl = "http://localhost:8081/tracking";//org.hibernate.cfg.Environment.getProperties().getProperty("business.baseUrl.customers");
 	}
 
 	public boolean VerifyExistingDriver(UUID id) {

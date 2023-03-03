@@ -85,7 +85,7 @@ public class Vehicle {
 		this.telemetryProfile = telemetryProfile;
 	}
 
-	public UUID getTtelemetryProfile() {
+	public UUID getTelemetryProfile() {
 		return telemetryProfile;
 	}
 	

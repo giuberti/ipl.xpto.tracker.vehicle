@@ -4,21 +4,20 @@ import java.net.http.HttpResponse;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.ipl.xpto.trackingVehicles.util.ApiConsumer;
 
 import java.util.UUID;
 
-@Component
+@Service
 public class CustomerBusiness {
 	
-	@Value("${customers_base_url}")
-	private String baseUrl;
+	private final String baseUrl;
 	
-	public CustomerBusiness() {
-		System.out.println(baseUrl);
-		baseUrl = "http://localhost:8081/tracking";//org.hibernate.cfg.Environment.getProperties().getProperty("business.baseUrl.customers");
+	public CustomerBusiness(@Value("${customers.base.url}") String baseUrl) {
+		this.baseUrl = baseUrl;
+		//baseUrl = "http://localhost:8081/tracking";//org.hibernate.cfg.Environment.getProperties().getProperty("business.baseUrl.customers");
 	}
 
 	public boolean VerifyExistingCustomer(UUID id) {
