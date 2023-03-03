@@ -2,8 +2,9 @@ package com.ipl.xpto.trackingVehicles.model;
 
 import java.util.UUID;
 import jakarta.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 
 @Entity
 @Table(name = "vehicles")
@@ -14,30 +15,30 @@ public class Vehicle {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
 
-	@NotNull
+	@NotNull(message="Customer ID is mandatory")
 	@Column(name = "customerOwner")
 	private UUID customerOwner;
 	
-	@NotNull
+	@NotNull(message="Telemetry profile ID is mandatory")
 	@Column(name = "telemetryProfile")
 	private UUID telemetryProfile;
 	
-	@NotNull
+	@NotNull(message="Driver ID is mandatory")
 	@Column(name = "currentDriver")
 	private UUID currentDriver;
 	
-	@NotNull
-	@Size(min=6, max=12)
+	@NotNull(message="Number Plate is mandatory")
+	@Size(min=6, max=12, message="Number plate should have between 6 and 12 chars")
 	@Column(name = "numberPlate")
 	private String numberPlate;
 	
-	@NotNull
-	@Size(min=17, max=17)
+	@NotNull(message="VIN is mandatory")
+	@Size(min=17, max=17, message="VIN must have 17 chars")
 	@Column(name = "vin")
 	private String vin;
 	
 	@Column(name = "color")
-	@Size(max=30)
+	@Size(max=30, message="Color name is limited to 30 chars")
 	private String color;
 	
 	public Vehicle() {
